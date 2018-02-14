@@ -1,5 +1,5 @@
 {
-  "name": "colbycomms/wp-heroic-panel",
+  "name": "colbycomms/heroic-panel",
   "description": "A shortcode for a panel with a background image and a superimposed content block.",
   "type": "library",
   "require": {
