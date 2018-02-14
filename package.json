@@ -35,7 +35,8 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "php demo/index.php > demo/index.html && npm run lint"
+      "pre-commit": "php demo/index.php > demo/index.html && npm run lint",
+      "pre-push": "npm run build"
     }
   }
 }
