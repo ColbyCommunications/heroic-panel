@@ -1,0 +1,30 @@
+{
+  "name": "colbycomms/wp-heroic-panel",
+  "description": "A shortcode for a panel with a background image and a superimposed content block.",
+  "type": "library",
+  "require": {
+    "php": "^7.1"
+  },
+  "require-dev": {
+    "squizlabs/php_codesniffer": "^3.2",
+    "wp-coding-standards/wpcs": "^0.14.0"
+  },
+  "authors": [
+    {
+      "name": "John Watkins",
+      "email": "john.watkins@colby.edu"
+    }
+  ],
+  "minimum-stability": "stable",
+  "autoload": {
+    "psr-4": {
+      "ColbyComms\\HeroicPanel\\": "heroic-panel/"
+    },
+    "files": ["heroic-panel/index.php"]
+  },
+  "scripts": {
+    "phpcbf": "phpcbf --extensions=php",
+    "lint": "phpcs --extensions=php -s",
+    "test": "composer lint"
+  }
+}

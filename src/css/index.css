@@ -1,0 +1,23 @@
+.heroic-panel__inner {
+  width: 100%;
+  min-height: 250px;
+  padding-right: 0;
+  padding-left: 0;
+  margin-right: 0;
+  margin-left: 0;
+  background-attachment: fixed;
+  background-position: top center;
+  background-size: 768px auto;
+  background-size: cover;
+}
+
+.heroic-panel__content-container {
+  position: relative;
+  display: flex;
+  flex: none;
+  flex-wrap: nowrap;
+  width: 100%;
+  max-width: 992px;
+  padding: 8.25rem 0 7.5rem;
+  margin: 0 auto;
+}

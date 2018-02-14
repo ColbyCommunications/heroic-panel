@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<ruleset>
+	<file>heroic-panel</file>
+	<exclude-pattern>vendor</exclude-pattern>
+	<exclude-pattern>node_modules</exclude-pattern>
+	<config name="installed_paths" value="vendor/wp-coding-standards/wpcs" />
+	<rule ref="WordPress">
+		<exclude name="WordPress.Files.FileName.InvalidClassFileName" />
+		<exclude name="WordPress.Files.FileName.NotHyphenatedLowercase" />
+		<exclude name="WordPress.VIP.RestrictedFunctions.switch_to_blog_switch_to_blog" />
+		<exclude name="WordPress.XSS.EscapeOutput.OutputNotEscaped" />
+		<exclude name="Generic.Formatting.MultipleStatementAlignment.NotSameWarning" />
+		<exclude name="WordPress.Arrays.MultipleStatementAlignment.DoubleArrowNotAligned" />
+		<exclude name="WordPress.VIP.SlowDBQuery.slow_db_query_meta_query" />
+		<exclude name="WordPress.VIP.SlowDBQuery.slow_db_query_tax_query" />
+		<exclude name="Generic.ControlStructures.InlineControlStructure.NotAllowed" />
+		<exclude name="Squiz.Commenting.FunctionComment.SpacingAfterParamType" />
+	</rule>
+</ruleset>
