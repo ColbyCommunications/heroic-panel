@@ -3,3 +3,7 @@ cache:
   yarn: true
 node_js:
   - stable
+notifications:
+    slack: colbycommunications:7VDpGw5uHu7tZ7aHDO2puCfG
+    on_success: change
+    on_failure: change
