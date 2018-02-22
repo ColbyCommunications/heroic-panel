@@ -1,7 +1,8 @@
 {
   "name": "heroic-panel",
   "version": "1.0.0",
-  "description": "HTML and CSS for a full-width panel with a background image and a superimposed content block.",
+  "description":
+    "HTML and CSS for a full-width panel with a background image and a superimposed content block.",
   "main": "index.php",
   "author": "John Watkins <john.watkins@colby.edu>",
   "license": "MIT",
@@ -37,9 +38,10 @@
     "start": "webpack -w",
     "prepare": "npm run build",
     "start:editor": "webpack -w --config webpack.editor.config.babel.js",
-    "build": "webpack && webpack -p && webpack --config webpack.editor.config.babel.js && webpack -p --config webpack.editor.config.babel.js",
+    "build":
+      "webpack && webpack -p && webpack --config webpack.editor.config.babel.js && webpack -p --config webpack.editor.config.babel.js",
     "lint": "eslint src/js",
-    "stylelint": "stylelint src/js",
+    "stylelint": "stylelint src/css",
     "test": "npm run lint && npm run stylelint",
     "precommit": "npm run test",
     "prepush": "npm run build"

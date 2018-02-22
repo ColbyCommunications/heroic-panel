@@ -26,7 +26,6 @@ registerBlockType('colbycomms/heroic-panel', {
       setAttributes({ backgroundImage });
     };
 
-    console.log(attributes);
     if (!attributes.backgroundImage) {
       return (
         <div>
@@ -59,7 +58,7 @@ registerBlockType('colbycomms/heroic-panel', {
           style={{
             backgroundImage: `url('${
               attributes.backgroundImage.sizes.full.url
-            };`,
+            });`,
           }}
         >
           <div className="heroic-panel__content-container">
