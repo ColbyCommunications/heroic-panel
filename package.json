@@ -17,6 +17,13 @@
     "babel-preset-stage-0": "^6.24.1",
     "css-loader": "^0.28.9",
     "cssnano": "^3.10.0",
+    "eslint": "^4.14.0",
+    "eslint-config-fbjs": "^2.0.1",
+    "eslint-plugin-babel": "^4.1.2",
+    "eslint-plugin-flowtype": "^2.40.1",
+    "eslint-plugin-jsx-a11y": "^6.0.3",
+    "eslint-plugin-react": "^7.5.1",
+    "eslint-plugin-relay": "^0.0.20",
     "extract-text-webpack-plugin": "^3.0.2",
     "husky": "^0.15.0-rc.8",
     "postcss-loader": "^2.0.10",
@@ -28,15 +35,22 @@
   },
   "scripts": {
     "start": "webpack -w",
-    "build": "webpack -p",
-    "lint": "stylelint src/css/*.css --fix",
     "prepare": "npm run build",
-    "test": "npm run lint"
+    "start:editor": "webpack -w --config webpack.editor.config.babel.js",
+    "build": "webpack && webpack -p && webpack --config webpack.editor.config.babel.js && webpack -p --config webpack.editor.config.babel.js",
+    "lint": "eslint src/js",
+    "stylelint": "stylelint src/js",
+    "test": "npm run lint && npm run stylelint",
+    "precommit": "npm run test",
+    "prepush": "npm run build"
   },
   "husky": {
     "hooks": {
       "pre-commit": "php demo/index.php > demo/index.html && npm run lint",
       "pre-push": "npm run build"
     }
+  },
+  "dependencies": {
+    "react": "^16.2.0"
   }
 }

@@ -16,7 +16,7 @@ class HeroicPanel {
 	 *
 	 * @var bool
 	 */
-	const PROD = true ;
+	const PROD = false;
 
 	/**
 	 * Plugin text domain.
@@ -63,13 +63,15 @@ class HeroicPanel {
 	/**
 	 * The plugin's shortcode tag.
 	 */
-	const SHORTCODE_TAG = 'heroic-panel';
+	const BLOCK_TAG = 'heroic-panel';
 
 	/**
 	 * Add hooks.
 	 */
 	public function __construct() {
 		add_action( 'init', [ __CLASS__, 'register_shortcode' ] );
+		add_action( 'init', [ __CLASS__, 'register_assets' ] );
+		add_action( 'init', [ __CLASS__, 'register_block' ] );
 		add_action( 'wp_enqueue_scripts', [ __CLASS__, 'enqueue_style' ] );
 		add_filter( 'template_redirect', [ __CLASS__, 'maybe_disable_style' ] );
 	}
@@ -78,7 +80,54 @@ class HeroicPanel {
 	 * Adds the shortcode.
 	 */
 	public static function register_shortcode() {
-		add_shortcode( self::SHORTCODE_TAG, [ Block::class, 'render' ] );
+		add_shortcode( self::BLOCK_TAG, [ Block::class, 'render' ] );
+	}
+
+	/**
+	 * Registers scripts and styles.
+	 *
+	 * @return void
+	 */
+	public static function register_assets() {
+		$min  = self::PROD === true ? '.min' : '';
+		$dist = self::get_dist_directory();
+
+		wp_enqueue_style(
+			self::TEXT_DOMAIN,
+			"$dist/" . self::TEXT_DOMAIN . "$min.css",
+			[],
+			self::VERSION
+		);
+
+		wp_register_style(
+			self::TEXT_DOMAIN . '-editor',
+			"$dist/" . self::TEXT_DOMAIN . "-editor$min.css",
+			['wp-edit-blocks']
+		);
+
+		wp_register_script(
+			self::TEXT_DOMAIN . '-editor',
+			"$dist/" . self::TEXT_DOMAIN . "-editor$min.js",
+			[ 'wp-blocks', 'wp-element' ]
+		);
+	}
+
+	/**
+	 * Adds the editor block.
+	 */
+	public static function register_block() {
+		if ( ! function_exists( 'register_block_type' ) ) {
+			return;
+		}
+
+		register_block_type(
+			self::VENDOR . '/' . self::BLOCK_TAG,
+			[
+				'editor_script' => self::TEXT_DOMAIN . '-editor',
+				'editor_style' => self::TEXT_DOMAIN . '-editor',
+				'style' => self::TEXT_DOMAIN
+			]
+		);
 	}
 
 	/**
@@ -94,14 +143,7 @@ class HeroicPanel {
 			return;
 		}
 
-		$min  = self::PROD === true ? '.min' : '';
-		$dist = self::get_dist_directory();
-		wp_enqueue_style(
-			self::TEXT_DOMAIN,
-			"$dist/" . self::TEXT_DOMAIN . "$min.css",
-			[],
-			self::VERSION
-		);
+		wp_enqueue_style( self::TEXT_DOMAIN );
 	}
 
 	/**
@@ -114,7 +156,11 @@ class HeroicPanel {
 			return;
 		}
 
-		if ( has_shortcode( $post->post_content, self::SHORTCODE_TAG ) ) {
+		if ( strpos( $post->post_content, 'class="heroic-panel"' ) !== false ) {
+			return;
+		}
+
+		if ( has_shortcode( $post->post_content, self::BLOCK_TAG ) ) {
 			return;
 		}
 

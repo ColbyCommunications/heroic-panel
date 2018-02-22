@@ -1,4 +1,5 @@
 module.exports = {
+  ignoreFiles: ['src/css/editor.css'],
   extends: ["stylelint-config-standard"],
   plugins: ["stylelint-order"],
   fix: true,
